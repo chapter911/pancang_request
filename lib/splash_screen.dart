@@ -138,6 +138,13 @@ class _SplashScreenState extends State<SplashScreen> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
             ),
             const SizedBox(
+              height: 10,
+            ),
+            Text(
+              "v. $_appversion",
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(
               height: 50,
             ),
             Visibility(

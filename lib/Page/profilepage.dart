@@ -60,6 +60,13 @@ class _ProfilePageState extends State<ProfilePage> {
               _pancangname,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              "v. $_appversion",
+              style: const TextStyle(fontSize: 18),
+            ),
             Expanded(
               child: RoundedLoadingButton(
                 controller: _logout,

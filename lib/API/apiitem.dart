@@ -66,4 +66,40 @@ class APIItem {
       return null;
     }
   }
+
+  static Future<List<APIItem>> getItemByName(
+      BuildContext context, String namabarang) async {
+    String apiURL =
+        "http://222.124.139.234/PancangRequest/Item/getItemByName/$namabarang";
+
+    BaseOptions options = BaseOptions(
+      baseUrl: apiURL,
+      connectTimeout: 60000,
+      receiveTimeout: 30000,
+    );
+
+    Dio dio = Dio(options);
+
+    Response response = await dio.get(apiURL);
+
+    try {
+      if (response.statusCode == 200) {
+        dynamic listData = response.data;
+
+        List<APIItem> data = [];
+        for (int i = 0; i < listData.length; i++) {
+          data.add(APIItem.hasilData(listData[i]));
+        }
+        return data;
+      } else {
+        g.Get.snackbar("Maaf", "Gagal Mengambil Data\nSilahkan Coba Ulang",
+            backgroundColor: Colors.yellow);
+        return null;
+      }
+    } catch (e) {
+      g.Get.snackbar("Maaf", "Gagal Mengambil Data\nSilahkan Coba Ulang",
+          backgroundColor: Colors.yellow);
+      return null;
+    }
+  }
 }
