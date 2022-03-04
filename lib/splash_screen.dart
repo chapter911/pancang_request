@@ -53,7 +53,19 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<bool> checkUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey("serialdevice")) {
-      Get.to(() => const HomePage(), duration: const Duration(seconds: 2));
+      DataSharedPreferences().readString("serialdevice").then((serialDevice) {
+        APIPancang.cekSerialDevice(context, serialDevice).then((value) {
+          Get.snackbar("Informasi", value[0].lanjut,
+              backgroundColor: Colors.yellow);
+          if (value[0].status == "success") {
+            Get.to(() => const HomePage(),
+                duration: const Duration(seconds: 2));
+          } else {
+            DataSharedPreferences().clearData();
+            Get.offAll(() => const SplashScreen());
+          }
+        });
+      });
     } else {
       setState(() {
         login = true;
