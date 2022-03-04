@@ -45,7 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(50),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -59,9 +59,6 @@ class _ProfilePageState extends State<ProfilePage> {
             Text(
               _pancangname,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-            ),
-            const SizedBox(
-              height: 20,
             ),
             Text(
               "v. $_appversion",

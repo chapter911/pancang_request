@@ -29,19 +29,16 @@ class _HistoryPageState extends State<HistoryPage> {
   }
 
   void getHistory() {
+    setState(() {
+      _history = [];
+    });
     APIHistory.getAllRequestByPancang(
             context, _idpancang, FormatChanger().tanggalAPIString(_tanggal))
         .then((value) {
-      if (value[0].id == null) {
-        setState(() {
-          _history = [];
-        });
+      if (value[0].itemname == null) {
         Get.snackbar("Maaf", "Tidak Ada History DiTanggal Ini",
             backgroundColor: Colors.yellow);
       } else {
-        setState(() {
-          _history = [];
-        });
         for (int i = 0; i < value.length; i++) {
           _history.add(Column(
             children: [
@@ -115,6 +112,44 @@ class _HistoryPageState extends State<HistoryPage> {
                     TableRow(
                       children: [
                         const Text(
+                          "Keterangan",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const Text(
+                          ":",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Text(
+                            value[i].pcgremark ?? "-",
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        const Text(
+                          "New Request",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const Text(
+                          ":",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Text(
+                            value[i].newrequest == "1" ? "Ya" : "Tidak",
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        const Text(
                           "Status",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
@@ -125,7 +160,7 @@ class _HistoryPageState extends State<HistoryPage> {
                         Align(
                           alignment: Alignment.bottomRight,
                           child: Text(
-                            value[i].processbpbremark,
+                            value[i].processbpbremark ?? "-",
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
