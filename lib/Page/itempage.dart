@@ -395,7 +395,6 @@ class _ItemPageState extends State<ItemPage> {
                                                     backgroundColor:
                                                         Colors.green[900],
                                                     colorText: Colors.white);
-                                                ;
                                               } else {
                                                 Get.snackbar("Informasi",
                                                     "Item Gagal DiInput",
